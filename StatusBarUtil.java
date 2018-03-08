@@ -45,6 +45,23 @@ public class StatusBarUtil {
     }
 
     /**
+     * 为布局文件中新增的状态栏布局设置背景色和高度
+     */
+    public static void setStatusViewAttr(View view, Activity activity) {
+        if (view == null || activity == null) {
+            return;
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            return;
+        }
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        layoutParams.height = StatusBarUtil.getStatusBarHeight(activity);
+        view.setLayoutParams(layoutParams);
+
+        view.setBackgroundColor(StatusBarUtil.getStatusBarColor(activity));
+    }
+
+    /**
      * 绘制一个和状态栏一样高的View，并添加到decorView中
      */
     public static void createStatusView(Activity activity) {
